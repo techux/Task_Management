@@ -53,23 +53,13 @@ import http from "http";
 import { connectDB } from "./src/databases/connection";
 import { App } from "./src/app";
 import { initSocket } from "./src/sockets";
-
 dotenv.config();
 
 const port = Number(process.env.PORT) || 4002;
 const base_url = process.env.BASE_URL || "";
 
-
-
 const myApp = new App(port, base_url);
 const app = myApp.app;
-
-app.get("/", (_req, res) => {
-  res.status(200).json({
-    message: "Collaborative Task Manager API is running",
-    env: process.env.NODE_ENV || "production",
-  });
-});
 
 app.use(
   cors({
@@ -77,6 +67,15 @@ app.use(
     credentials: true,
   })
 );
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.get("/", (_req, res) => {
+  res.status(200).json({
+    message: "Collaborative Task Manager API is running",
+    env: process.env.NODE_ENV || "production",
+  });
+});
 
 const server = http.createServer(app);
 
