@@ -54,12 +54,12 @@ app.use((0, cors_1.default)({
 }));
 app.use(express_1.default.json({ limit: "16kb" }));
 app.use(express_1.default.urlencoded({ extended: true, limit: "16kb" }));
-app.use(express_1.default.static("public"));
 const server = http_1.default.createServer(app);
 const startServer = async () => {
     try {
         await (0, connection_1.connectDB)();
         await myApp.initialize();
+        app.use(express_1.default.static("public"));
         (0, sockets_1.initSocket)(server);
         server.listen(port, () => {
             console.log(`Server running on port ${port}`);

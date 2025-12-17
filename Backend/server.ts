@@ -23,7 +23,6 @@ app.use(
 
 app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
-app.use(express.static("public"));
 
 const server = http.createServer(app);
 
@@ -31,6 +30,7 @@ const startServer = async () => {
   try {
     await connectDB();
     await myApp.initialize();
+    app.use(express.static("public"));
 
     initSocket(server);
 
