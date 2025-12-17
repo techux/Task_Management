@@ -24,18 +24,11 @@ exports.signup = signup;
 const login = async (req, res, next) => {
     try {
         const { user, token } = await (0, user_service_1.loginService)(req.body);
-        // res.cookie("access_token", token, {
-        //   httpOnly: true,
-        //   secure: process.env.NODE_ENV === "production",
-        //   sameSite: "strict",
-        //     path: "/",
-        //   maxAge: 24 * 60 * 60 * 1000,
-        // });
         res.cookie("access_token", token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-            maxAge: 7 * 24 * 60 * 60 * 1000,
+            maxAge: 24 * 60 * 60 * 1000
         });
         return res.status(200).json({
             message: message_1.SUCCESS_RESPONSE.LOGIN_SUCCESS,

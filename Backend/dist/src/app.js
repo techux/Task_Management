@@ -31,6 +31,12 @@ class App {
         this.app.use((0, cookie_parser_1.default)());
     }
     initializeRoutes() {
+        this.app.get("/", (_req, res) => {
+            res.status(200).json({
+                status: "success",
+                message: "Task Management API is running ",
+            });
+        });
         this.app.use("/api/v1", routev1_1.default);
     }
 }
