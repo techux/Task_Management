@@ -1,4 +1,11 @@
 "use strict";
+// import express from "express";
+// import * as dotenv from "dotenv";
+// import cors from "cors";
+// import http from "http";
+// import { connectDB } from "./src/databases/connection";
+// import { App } from "./src/app";
+// import { initSocket } from "./src/sockets";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -36,7 +43,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
 const dotenv = __importStar(require("dotenv"));
 const cors_1 = __importDefault(require("cors"));
 const http_1 = __importDefault(require("http"));
@@ -48,15 +54,14 @@ const port = Number(process.env.PORT) || 4002;
 const base_url = process.env.BASE_URL || "";
 const myApp = new app_1.App(port, base_url);
 const app = myApp.app;
+app.set("trust proxy", 1);
 app.use((0, cors_1.default)({
     origin: "https://task-management-blue-ten.vercel.app",
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
 }));
-app.use(express_1.default.json({ limit: "16kb" }));
-app.use(express_1.default.urlencoded({ extended: true, limit: "16kb" }));
-app.use(express_1.default.static("public"));
+app.options("*", (0, cors_1.default)());
 const server = http_1.default.createServer(app);
 app.get("/health", (_req, res) => {
     res.status(200).send("ok-from-server-file");
@@ -71,7 +76,7 @@ const startServer = async () => {
         });
     }
     catch (err) {
-        console.error(" Server startup failed:", err);
+        console.error("Server startup failed:", err);
         process.exit(1);
     }
 };

@@ -1,3 +1,57 @@
+// import express from "express";
+// import * as dotenv from "dotenv";
+// import cors from "cors";
+// import http from "http";
+// import { connectDB } from "./src/databases/connection";
+// import { App } from "./src/app";
+// import { initSocket } from "./src/sockets";
+
+// dotenv.config();
+
+// const port = Number(process.env.PORT) || 4002;
+// const base_url = process.env.BASE_URL || "";
+
+// const myApp = new App(port, base_url);
+// const app = myApp.app;
+// app.set("trust proxy", 1);
+
+// app.use(
+//   cors({
+//     origin: "https://task-management-blue-ten.vercel.app",
+//     credentials: true,
+//     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//   })
+// );
+
+// app.use(express.json({ limit: "16kb" }));
+// app.use(express.urlencoded({ extended: true, limit: "16kb" }));
+// app.use(express.static("public"));
+
+// const server = http.createServer(app);
+// app.get("/health", (_req, res) => {
+//   res.status(200).send("ok-from-server-file");
+// });
+
+// const startServer = async () => {
+//   try {
+//     await connectDB();
+//     await myApp.initialize();
+
+//     initSocket(server);
+
+//     server.listen(port, () => {
+//       console.log(`Server running on port ${port}`);
+//     });
+//   } catch (err) {
+//     console.error(" Server startup failed:", err);
+//     process.exit(1);
+//   }
+// };
+
+// startServer();
+
+
 import express from "express";
 import * as dotenv from "dotenv";
 import cors from "cors";
@@ -14,6 +68,8 @@ const base_url = process.env.BASE_URL || "";
 const myApp = new App(port, base_url);
 const app = myApp.app;
 
+app.set("trust proxy", 1);
+
 app.use(
   cors({
     origin: "https://task-management-blue-ten.vercel.app",
@@ -23,11 +79,9 @@ app.use(
   })
 );
 
-app.use(express.json({ limit: "16kb" }));
-app.use(express.urlencoded({ extended: true, limit: "16kb" }));
-app.use(express.static("public"));
-
+app.options("*", cors());
 const server = http.createServer(app);
+
 app.get("/health", (_req, res) => {
   res.status(200).send("ok-from-server-file");
 });
@@ -43,7 +97,7 @@ const startServer = async () => {
       console.log(`Server running on port ${port}`);
     });
   } catch (err) {
-    console.error(" Server startup failed:", err);
+    console.error("Server startup failed:", err);
     process.exit(1);
   }
 };
