@@ -50,7 +50,8 @@ const myApp = new app_1.App(port, base_url);
 const app = myApp.app;
 app.use((0, cors_1.default)({
     origin: [
-        "*",
+        "http://localhost:5173",
+        "https://YOUR-FRONTEND-PROD-URL.com",
     ],
     credentials: true,
 }));

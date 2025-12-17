@@ -16,7 +16,7 @@ export const verifyJWT = async (
 ): Promise<void> => {
     try {
         let token = req.cookies?.access_token;
-
+    console.log("Verifying JWT, token from cookies:", req.cookies?.access_token);
         if (!token && req.headers.authorization) {
             token = req.headers.authorization.split(" ")[1];
         }

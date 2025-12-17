@@ -13,11 +13,14 @@ const base_url = process.env.BASE_URL || "";
 
 const myApp = new App(port, base_url);
 const app = myApp.app;
- 
+
 app.use(cors({
+
   origin: [
-    "*",
+    "http://localhost:5173",
+    "https://YOUR-FRONTEND-PROD-URL.com",
   ],
+
   credentials: true,
 }));
 
