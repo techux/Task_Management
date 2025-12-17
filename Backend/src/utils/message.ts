@@ -27,8 +27,8 @@ export const ERROR_RESPONSE = {
 
   // Users
   USER_NOT_FOUND: "User not found",
-  EMAIL_NOT_EXISTS: "email not exists",
-  INCORRECT_PASSWORD: "Incorrect password",
+  EMAIL_NOT_EXISTS: "email not exists, please register first",
+  INCORRECT_PASSWORD: "Incorrect password, please try again",
 
   // Tasks
   TASK_NOT_FOUND: "Task not found",
