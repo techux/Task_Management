@@ -35,7 +35,7 @@ export class App {
         message: "Collaborative Task Manager API is running"
        })
        
-    })
+    });
     this.app.use("/api/v1", routev1);
   }
 }
