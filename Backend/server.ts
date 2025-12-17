@@ -29,22 +29,32 @@ const server = http.createServer(app);
 app.get("/health", (_req, res) => {
   res.status(200).send("ok-from-server-file");
 });
-
-
 const startServer = async () => {
   try {
-    await connectDB();
-    await myApp.initialize();
-
-    initSocket(server);
-
     server.listen(port, () => {
       console.log(`Server running on port ${port}`);
     });
   } catch (err) {
-    console.error(" Server startup failed:", err);
+    console.error("Server startup failed:", err);
     process.exit(1);
   }
 };
+
+
+// const startServer = async () => {
+//   try {
+//     await connectDB();
+//     await myApp.initialize();
+
+//     initSocket(server);
+
+//     server.listen(port, () => {
+//       console.log(`Server running on port ${port}`);
+//     });
+//   } catch (err) {
+//     console.error(" Server startup failed:", err);
+//     process.exit(1);
+//   }
+// };
 
 startServer();
