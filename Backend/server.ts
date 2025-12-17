@@ -17,7 +17,7 @@ const app = myApp.app;
 app.use(cors({
 
   origin: [
-    "http://localhost:5173",
+    "task-management-blue-ten.vercel.app",
     "https://task-management-system-frontend-ruby-seven.vercel.app",
   ],
 
