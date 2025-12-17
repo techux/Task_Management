@@ -16,14 +16,12 @@ const app = myApp.app;
 
 app.use(
   cors({
-    origin: [
-      "https://task-management-blue-ten.vercel.app",
-      "http://localhost:5173",
-    ],
+    origin: "https://task-management-blue-ten.vercel.app",
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-
 
 app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));

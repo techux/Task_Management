@@ -49,11 +49,10 @@ const base_url = process.env.BASE_URL || "";
 const myApp = new app_1.App(port, base_url);
 const app = myApp.app;
 app.use((0, cors_1.default)({
-    origin: [
-        "https://task-management-blue-ten.vercel.app",
-        "http://localhost:5173",
-    ],
+    origin: "https://task-management-blue-ten.vercel.app",
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
 }));
 app.use(express_1.default.json({ limit: "16kb" }));
 app.use(express_1.default.urlencoded({ extended: true, limit: "16kb" }));
