@@ -18,7 +18,7 @@ app.use(cors({
 
   origin: [
     "http://localhost:5173",
-    "https://YOUR-FRONTEND-PROD-URL.com",
+    "https://task-management-system-frontend-ruby-seven.vercel.app",
   ],
 
   credentials: true,
