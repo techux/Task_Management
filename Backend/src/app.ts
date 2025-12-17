@@ -1,6 +1,5 @@
 import express, { Application } from "express";
 import cookieParser from "cookie-parser";
-import {Request, Response} from 'express';
 import routev1 from "./routes/routev1";
 
 export class App {
@@ -30,6 +29,11 @@ export class App {
   }
 
   private initializeRoutes(): void {
+     this.app.get("/", (_req, res) => {
+    res.status(200).json({
+      message: "Collaborative Task Manager API is running",
+    });
+  });
     this.app.use("/api/v1", routev1);
   }
 }
