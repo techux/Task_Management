@@ -40,7 +40,9 @@ const express_1 = __importDefault(require("express"));
 const dotenv = __importStar(require("dotenv"));
 const cors_1 = __importDefault(require("cors"));
 const http_1 = __importDefault(require("http"));
+const connection_1 = require("./src/databases/connection");
 const app_1 = require("./src/app");
+const sockets_1 = require("./src/sockets");
 dotenv.config();
 const port = Number(process.env.PORT) || 4002;
 const base_url = process.env.BASE_URL || "";
@@ -59,27 +61,17 @@ app.get("/health", (_req, res) => {
 });
 const startServer = async () => {
     try {
+        await (0, connection_1.connectDB)();
+        await myApp.initialize();
+        (0, sockets_1.initSocket)(server);
         server.listen(port, () => {
             console.log(`Server running on port ${port}`);
         });
     }
     catch (err) {
-        console.error("Server startup failed:", err);
+        console.error(" Server startup failed:", err);
         process.exit(1);
     }
 };
-// const startServer = async () => {
-//   try {
-//     await connectDB();
-//     await myApp.initialize();
-//     initSocket(server);
-//     server.listen(port, () => {
-//       console.log(`Server running on port ${port}`);
-//     });
-//   } catch (err) {
-//     console.error(" Server startup failed:", err);
-//     process.exit(1);
-//   }
-// };
 startServer();
 //# sourceMappingURL=server.js.map

@@ -29,11 +29,6 @@ export class App {
   }
 
   private initializeRoutes(): void {
-     this.app.get("/", (_req, res) => {
-    res.status(200).json({
-      message: "Collaborative Task Manager API is running",
-    });
-  });
     this.app.use("/api/v1", routev1);
   }
 }
