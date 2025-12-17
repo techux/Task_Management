@@ -56,6 +56,9 @@ app.use(express_1.default.json({ limit: "16kb" }));
 app.use(express_1.default.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express_1.default.static("public"));
 const server = http_1.default.createServer(app);
+app.get("/health", (_req, res) => {
+    res.status(200).send("ok-from-server-file");
+});
 const startServer = async () => {
     try {
         await (0, connection_1.connectDB)();

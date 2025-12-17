@@ -26,6 +26,10 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express.static("public"));
 
 const server = http.createServer(app);
+app.get("/health", (_req, res) => {
+  res.status(200).send("ok-from-server-file");
+});
+
 
 const startServer = async () => {
   try {
