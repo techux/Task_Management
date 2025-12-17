@@ -72,14 +72,14 @@ app.set("trust proxy", 1);
 
 app.use(
   cors({
-    origin: "https://task-management-blue-ten.vercel.app",
+    origin: "http://localhost:5173",
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-app.options("*", cors());
+// app.options("*", cors());
 const server = http.createServer(app);
 
 app.get("/health", (_req, res) => {
